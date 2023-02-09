@@ -1,0 +1,109 @@
+body {
+    padding: 15px 15px 0px;
+}
+
+li {
+    line-height: 2;
+  }
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    
+}
+
+.image {
+    width: 250px;    
+    margin-right: 50px;
+    border-width: 10px;
+    border: 3px solid rgb(196, 193, 193);
+    border-radius: 10px;    
+    }
+
+.image2 {
+    width: 350px;    
+    margin-right: 50px;    
+    border-width: 10px;
+    border: 3px solid rgb(196, 193, 193);
+    border-radius: 10px;    
+    }  
+
+.image_pos {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-width: 10px;
+    border: 3px solid rgb(196, 193, 193);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    
+    
+}
+
+p, .title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.titles {
+    font-weight: bold;
+}
+
+.main_list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+
+#field {
+    height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+   -webkit-line-clamp: 3; /* number of lines to show */
+           line-clamp: 3; 
+   -webkit-box-orient: vertical;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0 10px;
+}
+
+#button {
+    margin-right: 20px;
+    background-color: grey;
+    border-color: grey;
+    padding: 0 5px 0;
+    font-size: 15px;
+}
+
+.new {
+    width: 80%;
+}
+
+#fields {
+    border-radius: 10px;
+    padding: 2px 6px 2px;
+}
+
+#space {
+    margin-left: 10px;
+}
+
+.comments {
+    border-width: 10px;
+    border: 3px solid rgb(196, 193, 193);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#smtext {
+    font-size: 10px;
+    margin-top: 10px;
+}

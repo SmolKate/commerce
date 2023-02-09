@@ -1,0 +1,53 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    <h2>Watchlist</h2>
+{% for watchlist in watchlists %}
+    
+
+    <div class=image_pos>
+
+        <img class=image src="{{ watchlist.listing.image.url }}">
+        
+        <div class=main_list>
+            <div>
+            <ul>
+            <li><a class="title" href="{% url 'listing_page' watchlist.listing.id %}">{{watchlist.listing.title}}</a></li>
+            {% if watchlist.listing.status == "close" %}
+            <li>CLOSED</li>
+            {% else %}
+            <li class="titles">Description:</li>          
+                <div id="field">
+                <li>{{watchlist.listing.description}}</li>
+                </div>
+            </ul>
+            </div>
+
+            <div>
+            <ul>
+            <li class="titles">Start price: {{watchlist.listing.start_bid}} $</li>
+         {% for maxval in maxvals %}
+            {% if maxval.listing == watchlist.listing.id %}
+            
+            
+            <li class="titles">Max bid: {{maxval.user_bid__max}} $</li>
+            {% endif %}
+         {% endfor maxval %}
+            
+            
+         {% for bid in listing.list_bid.all %}
+         {% empty %}
+            <li>No bids</li>
+         {% endfor bid %}
+            <li>Created: {{watchlist.listing.modify_time}}</li>
+            {% endif %} 
+            </ul>
+            </div>
+          
+        </div>
+    </div>
+{% endfor %}
+
+
+{% endblock %}

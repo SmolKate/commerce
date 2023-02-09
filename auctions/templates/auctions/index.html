@@ -1,0 +1,58 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+{% block head %}
+
+    <h2>Active Listings</h2>
+{% endblock head %}
+{% for listing in listings %}
+    
+    {% if listing.status == "close" %}
+    {% else %}
+
+    
+
+    <div class=image_pos>
+
+        <img class=image src="{{ listing.image.url }}">
+        
+        <div class=main_list>
+        
+            <div>
+            <ul>
+            <li><a class="title" href="{% url 'listing_page' listing.id %}">{{listing.title}}</a></li>
+            <li class="titles">Description:</li>
+                <div id="field">
+                <li>{{listing.description}}</li>
+                </div>
+            </ul>
+            </div>
+
+            <div>
+            <ul>
+            <li class="titles">Start price: {{listing.start_bid}} $</li>
+         {% for maxval in maxvals %}
+            {% if maxval.listing == listing.id %}
+            
+            
+            <li class="titles">Max bid: {{maxval.user_bid__max}} $</li>
+            {% endif %}
+         {% endfor maxval %}
+            
+            
+         {% for bid in listing.list_bid.all %}
+         {% empty %}
+            <li>No bids</li>
+         {% endfor bid %}
+            <li>Created: {{listing.modify_time}}</li>
+            </ul>
+            </div>
+           
+        </div>
+    </div>
+    {% endif %}
+
+{% endfor %}
+
+
+{% endblock %}

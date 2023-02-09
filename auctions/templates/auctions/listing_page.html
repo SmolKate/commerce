@@ -1,0 +1,127 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    
+    <h3>{{listing.title}}</h3>
+    {% if user.is_authenticated %}
+    <div class="buttons">
+        
+        <div> 
+            {% if watchlists %}
+            <form action="{% url 'delete' listing.id %}" method="post">
+            {% csrf_token %}
+            <input id="button" class="btn btn-primary" type="submit" value="Delete from watchlist">
+            </form>
+            {% else %}
+            <form action="{% url 'add' listing.id %}" method="post">
+            {% csrf_token %}
+            <input id="button" class="btn btn-primary" type="submit" value="Add to watchlist">
+            </form>
+            {% endif %}
+        </div>
+    
+            {% if listing.username.username == user.username %}
+        <div>
+            <form action="{% url 'close' listing.id %}" method="post">
+            {% csrf_token %}
+            <input id="button" class="btn btn-primary" type="submit" value="Close auction">
+            </form>
+        </div>
+
+        <div>
+            <form action="{% url 'edit' listing.id%}">
+            <input id="button" class="btn btn-primary" type="submit" value="Edit">
+            </form>
+        </div>
+            {% endif %}
+    </div>
+    {% endif %}
+    <div class="buttons">
+        <img class="image2" src="{{ listing.image.url }}">
+        
+            
+        <div class="main_list">
+            
+            {% if listing.status == "close" %}
+            <h3>CLOSED</h3>
+                {%if name.username.username == user.username %}
+                <ul>
+                <li>You are the winner!</li>
+                <li>Price: $ {{name.user_bid}}</li>
+                </ul>
+                {% endif %}
+            {% else %}
+            <div>
+            <p>Description:</p>
+            
+            {{listing.description}}
+            </div>
+
+
+            <div> 
+                <div class="buttons">
+                    <div>
+                        {% if name %}
+                            <p>Price: $ {{name.user_bid}}</p>   
+                        {% endif %}
+
+                        {% for bid in listing.list_bid.all %}
+                        {% empty %}
+                            <p>Price: ${{listing.start_bid}}</p>
+                        {% endfor bid %}
+                    </div>
+                    <div id="space">
+                        {% if name.username.username == user.username %}
+                            (Your bid is the current bid.)
+                        {% endif %}
+                    </div>
+                </div>
+                {% if user.is_authenticated %}
+                <form method="POST" encType="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    
+                    <div>{{message}}</div>
+                    
+                    
+
+                    <button class="btn btn-primary" type="submit">Place bid</button>
+                </form>
+                {% endif %}
+
+            </div>
+        </div>    
+    </div>
+
+
+    <p>Details:</p>
+
+    <ul>
+        <li>Listed by: {{listing.username}}</li>
+        <li>Category: {{listing.category}}</li>
+    </ul>
+
+    <div> 
+        <p>Comments:</p>
+        {% for comment in comments %}
+        <div class="comments">
+        
+            {{comment.comment_text}}
+            <div id="smtext"> from: {{comment.username}},   date/time: {{comment.comment_time}}</div>
+    
+        </div>
+        {% empty %}
+        No comments
+        {% endfor bid %}
+    </div>
+
+    {% if user.is_authenticated %}
+    <form method="POST" encType="multipart/form-data">
+        {% csrf_token %}
+        {{ form2.as_p }}
+        <button class="btn btn-primary" type="submit">Add Comment</button>
+    </form>
+    {% endif %}
+
+ {% endif%}
+{% endblock %}
